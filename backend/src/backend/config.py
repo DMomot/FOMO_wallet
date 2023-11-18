@@ -5,6 +5,7 @@ from backend.models import ChainId
 
 class Settings(BaseSettings):
     app_name: str = "Fomogotchi API"
+
     one_inch_devportal_api_key: str
 
     ethereum_node_url: str

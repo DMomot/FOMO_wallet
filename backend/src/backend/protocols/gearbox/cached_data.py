@@ -11,7 +11,7 @@ state_last_month = {
                 "description": "APY / Unrealized value in GEAR tokens",
                 "token_address": "0xba3335588d9403515223f109edc4eb7269a9ab5d",
                 "apy_in_gear_tokens": 0.0922970446205191,
-                "unrealized_value": lambda value: value * (0.0922970446205191 / 12),
+                "unrealized_value": lambda value: value * (0.0922970446205191),
             },
         },
         {
@@ -23,7 +23,7 @@ state_last_month = {
                 "description": "APY / Unrealized value in GEAR tokens",
                 "token_address": "0xba3335588d9403515223f109edc4eb7269a9ab5d",
                 "apy_in_gear_tokens": 0.0976843737267312,
-                "unrealized_value": lambda value: value * (0.0976843737267312 / 12),
+                "unrealized_value": lambda value: value * (0.0976843737267312),
             },
         },
         {
@@ -35,7 +35,7 @@ state_last_month = {
                 "description": "APY / Unrealized value in GEAR tokens",
                 "token_address": "0xba3335588d9403515223f109edc4eb7269a9ab5d",
                 "apy_in_gear_tokens": 0.0410118213941159,
-                "unrealized_value": lambda value: value * (0.0410118213941159 / 12),
+                "unrealized_value": lambda value: value * (0.0410118213941159),
             },
         },
         {
@@ -47,7 +47,7 @@ state_last_month = {
                 "description": "APY / Unrealized value in GEAR tokens",
                 "token_address": "0xba3335588d9403515223f109edc4eb7269a9ab5d",
                 "apy_in_gear_tokens": 0.0301588247505191,
-                "unrealized_value": lambda value: value * (0.0301588247505191 / 12),
+                "unrealized_value": lambda value: value * (0.0301588247505191),
             },
         },
     ]
