@@ -20,11 +20,11 @@
             <div class="main-total-container">
                 <div class="total-info-block">
                     <div class="total-info-title">Total Value</div>
-                    <div class="total-info-value">[Значение]</div>
+                    <div class="total-info-value">{{ formatValue(totalFomoValues.totalValue) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized Profit</div>
-                    <div class="total-info-value">[Значение]</div>
+                    <div class="total-info-title">Total Unrealized Profit by 1 month</div>
+                    <div class="total-info-value">-{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
                     <div class="total-info-title">Total Unrealized APR</div>
@@ -41,7 +41,7 @@
                     <span class="token-amount">Amount</span>
                     <span class="token-price">Price</span>
                     <span class="token-value">Value</span>
-                    <span class="token-pnl">PnL</span>
+                    <span class="token-pnl">Unreal. revenue</span>
                     <span class="token-roi">APY</span>
                 </div>
                 <div v-for="token in tokens"
@@ -53,7 +53,7 @@
                         <img v-else :src=template_logo :alt=key class="token-img">
                         <img :src=chainsLogo[token.chain_id] :alt=key class="chain-img">
                     </div>
-                    <span class="token-name">{{ token.symbol }}</span>
+                    <span class="token-name">{{ token.name }}</span>
                     <span class="token-amount">
                         {{ token.amount.toFixed(4) }} {{ token.symbol }}
                     </span>
@@ -61,10 +61,10 @@
                         {{ token.price.toFixed(4)  }}
                     </span>
                     <span class="token-value">
-                        {{ (token.amount * token.price).toFixed(4) }}
+                        {{ formatValue(token.amount * token.price) }} $
                     </span>
-                     <span v-if="token.fomo" class="token-pnl">
-                        -{{ token.fomo[0].unrealized_value.toFixed(2) }} $
+                    <span v-if="token.fomo" class="token-pnl">
+                        {{formatValue(token.fomo[0].unrealized_value) }} $
                     </span>
                     <span v-else class="token-pnl">
                         0
@@ -76,8 +76,32 @@
                         0
                     </span> 
                 </div>
-                <Dialog v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :header="'Hi'">
-                    <p>{{ dialogData }}</p>
+                <Dialog v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :header="'Unrealized rewards'">
+                    <div class="dialog-container">
+                        <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Chain</th>
+                                <th>Protocol Name</th>
+                                <th>Token Name</th>
+                                <th>APY</th>
+                                <th>Unrealized Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in dialogData.fomo" :key="item.protocol_name">
+                                <td>{{ item.chain_id }}</td>
+                                <td>{{ item.protocol_name }}</td>
+                                <td>{{ dialogData.name }}</td>
+                                <td>{{ formatValue(item.apy) }}</td>
+                                <td>{{ formatValue(item.unrealized_value) }} $</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        {{ dialogData }}
+                    </div>
                 </Dialog>
             </div>
         </div>
@@ -98,7 +122,7 @@ import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { checkAddress, calculateTotalValues } from '@/helpers/index.js'
+import { checkAddress, calculateTotalValues, formatValue } from '@/helpers/index.js'
 import { getFomoVibe } from '@/api/index.js'
 export default {
     components: {
@@ -118,6 +142,7 @@ export default {
         let dialogData = ref({});
         let currentAddress = ref('')
         let isLoading = ref(false);
+        let totalFomoValues = ref({})
 
 
         const FOMOSearch = async () => {
@@ -127,7 +152,7 @@ export default {
             currentAddress.value = searchQuery.value
             searchQuery.value = ''
             screen.value = 'result'
-            console.log('tokens', calculateTotalValues(tokens.value))
+            totalFomoValues.value = calculateTotalValues(tokens.value)
             isLoading.value = false;
         }
 
@@ -145,6 +170,8 @@ export default {
             dialogData,
             chainsLogo,
             tokens,
+            totalFomoValues,
+            formatValue,
             ProgressSpinner,
             searchQuery,
             screen,

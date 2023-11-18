@@ -1,6 +1,6 @@
 {
-    "eth": "https://w7.pngwing.com/pngs/268/1013/png-transparent-ethereum-eth-hd-logo-thumbnail.png",
-    "polygon": "https://i.pinimg.com/originals/9b/1e/97/9b1e977d00b5d887608b156705a10759.png",
-    "arbitrum": "https://w7.pngwing.com/pngs/268/1013/png-transparent-ethereum-eth-hd-logo-thumbnail.png",
-    "gnosis": "https://s2.coinmarketcap.com/static/img/coins/200x200/8635.png"
+    "1": "https://w7.pngwing.com/pngs/268/1013/png-transparent-ethereum-eth-hd-logo-thumbnail.png",
+    "137": "https://i.pinimg.com/originals/9b/1e/97/9b1e977d00b5d887608b156705a10759.png",
+    "42161": "https://w7.pngwing.com/pngs/268/1013/png-transparent-ethereum-eth-hd-logo-thumbnail.png",
+    "1000": "https://s2.coinmarketcap.com/static/img/coins/200x200/8635.png"
 }
