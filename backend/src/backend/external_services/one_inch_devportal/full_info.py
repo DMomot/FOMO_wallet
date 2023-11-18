@@ -32,7 +32,7 @@ async def get_address_info(
                     "decimals": token_info["decimals"],
                 }
 
-    return sorted(result, key=lambda x: result[x]["balance"], reverse=True)
+    return dict(sorted(result.items(), key=lambda kv: kv[1]["value"], reverse=True))
 
 
 if __name__ == '__main__':

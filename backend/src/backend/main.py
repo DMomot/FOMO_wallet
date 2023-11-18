@@ -6,8 +6,8 @@ from backend.models import AddressType
 app = FastAPI()
 
 
-@app.get("/")
-async def f(
-        address: AddressType = '0x7b065Fcb0760dF0CEA8CFd144e08554F3CeA73D1',
+@app.get("/{address}")
+async def get_fomo(
+    address: AddressType,
 ):
     return await get_address_info(address=address)

@@ -1,7 +1,8 @@
 import asyncio
 
-import aiohttp
+from aiohttp_retry import RetryClient, RandomRetry
 
+from backend.logger import log
 from backend.models import ChainId, AddressType
 from backend.config import settings
 
@@ -10,13 +11,17 @@ async def get_balances_by_chain_id_and_address(
         chain_id: ChainId,
         address: AddressType,
 ):
-    async with aiohttp.request(
-            "GET",
-            f"https://api.1inch.dev/balance/v1.2/{chain_id}/balances/{address}",
-            headers={'Authorization': f'Bearer {settings.one_inch_devportal_api_key}'},
-    ) as response:
-        print(response)
-        balances: dict[AddressType, int] = {k: int(v) for k, v in (await response.json()).items()}
+    async with RetryClient(
+            retry_options=RandomRetry(statuses=[429], attempts=10, min_timeout=0.5, max_timeout=0.5),
+            logger=log,
+    ) as client:
+        async with client.request(
+                "GET",
+                f"https://api.1inch.dev/balance/v1.2/{chain_id}/balances/{address}",
+                headers={'Authorization': f'Bearer {settings.one_inch_devportal_api_key}'},
+        ) as response:
+            log.info(f"balances", status=response.status, chain_id=chain_id, url=response.url)
+            balances: dict[AddressType, int] = {k: int(v) for k, v in (await response.json()).items()}
     return balances
 
 
