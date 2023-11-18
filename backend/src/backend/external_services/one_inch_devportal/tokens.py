@@ -1,12 +1,12 @@
 import asyncio
 
+from backend.cache import cache
 from backend.logger import log
 from backend.models import ChainId, AddressType
 from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
-from shelved_cache import PersistentCache
 from shelved_cache.decorators import asynccached
-from cachetools import TTLCache
+
 
 async def get_tokens_by_chain_id(
         chain_id: ChainId,
@@ -25,10 +25,7 @@ async def get_tokens_by_chain_id(
         return tokens
 
 
-filename = '/tmp/mycache'
-pc = PersistentCache(TTLCache, filename, maxsize=1024, ttl=600)
-
-@asynccached(pc)
+@asynccached(cache)
 async def get_tokens():
     tokens_by_chain_id = await asyncio.gather(
         *(
