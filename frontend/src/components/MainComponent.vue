@@ -42,33 +42,39 @@
                     <span class="token-price">Price</span>
                     <span class="token-value">Value</span>
                     <span class="token-pnl">PnL</span>
-                    <span class="token-roi">ROI</span>
+                    <span class="token-roi">APY</span>
                 </div>
                 <div v-for="token in tokens"
-                    :key="(token.address, token.chainId)"
+                    :key="(token.address, token.chain_id)"
                     class="token-item"
                     @click="showModal(token)">
                     <div class="img-container">
-                        <img v-if="token.thumbnail" :src=token.thumbnail :alt=key class="token-img">
+                        <img v-if="token.logo_url" :src=token.logo_url :alt=key class="token-img">
                         <img v-else :src=template_logo :alt=key class="token-img">
-                        <img :src=chainsLogo[token.chain] :alt=key class="chain-img">
+                        <img :src=chainsLogo[token.chain_id] :alt=key class="chain-img">
                     </div>
-                    <span class="token-name">{{token.name}}</span>
+                    <span class="token-name">{{ token.symbol }}</span>
                     <span class="token-amount">
-                        {{ (token.balance/10**token.decimals).toFixed(4) }}
+                        {{ token.amount.toFixed(4) }} {{ token.symbol }}
                     </span>
                     <span class="token-price">
-                        0
+                        {{ token.price.toFixed(4)  }}
                     </span>
                     <span class="token-value">
+                        {{ (token.amount * token.price).toFixed(4) }}
+                    </span>
+                     <span v-if="token.fomo" class="token-pnl">
+                        -{{ token.fomo[0].unrealized_value.toFixed(2) }} $
+                    </span>
+                    <span v-else class="token-pnl">
                         0
                     </span>
-                    <span class="token-pnl">
-                        0
+                    <span v-if="token.fomo" class="token-roi">
+                        {{ (100 * token.fomo[0].apy).toFixed(2) }} %
                     </span>
-                    <span class="token-roi">
+                    <span v-else class="token-roi">
                         0
-                    </span>
+                    </span> 
                 </div>
                 <Dialog v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :header="'Hi'">
                     <p>{{ dialogData }}</p>
@@ -92,7 +98,7 @@ import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { checkAddress } from '@/helpers/index.js'
+import { checkAddress, calculateTotalValues } from '@/helpers/index.js'
 import { getFomoVibe } from '@/api/index.js'
 export default {
     components: {
@@ -121,6 +127,7 @@ export default {
             currentAddress.value = searchQuery.value
             searchQuery.value = ''
             screen.value = 'result'
+            console.log('tokens', calculateTotalValues(tokens.value))
             isLoading.value = false;
         }
 

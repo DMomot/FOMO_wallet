@@ -34,13 +34,26 @@ export async function resolveENSName(ensName) {
     }
   }
 
-  export const checkAddress = async (address) =>{
+export const checkAddress = async (address) =>{
     if (address.slice(0,2) == '0x' & address.length == 42) {
         return address;
     }
     else {
         return resolveENSName(address);
     }
+}
+
+export const calculateTotalValues = (tokens) =>{
+    let total = {"totalValue":0,
+             "totalUP":0}
+    for (let i = 0; i < Object.keys(tokens).length; i++) {
+        console.log('tokens[i]', tokens[i])
+        total.totalValue += tokens[i].value;
+        if (tokens[i].fomo){
+            total.totalUP += tokens[i].fomo[0].value;
+        }
+    }
+    return total;
   }
 
 
