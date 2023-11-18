@@ -52,6 +52,7 @@ async def get_fomo_last_month(
                     protocol_info['unrealized_value'] = token_info['value'] * (protocol_info['apy'])
                     protocol_info['unrealized_amount'] = token_info['amount'] * (protocol_info['apy'])
                     protocol_info['logo_url'] = protocol.get_logo_url()
+                    protocol_info['project_url'] = protocol.get_project_url()
 
                     if (
                             'additional_info' in protocol_info

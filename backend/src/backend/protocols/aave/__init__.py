@@ -8,6 +8,9 @@ class AAVE(BaseProtocol):
     def get_logo_url(self):
         return 'https://icons.llamao.fi/icons/protocols/aave?w=128&h=128'
 
+    def get_project_url(self):
+        return 'https://app.aave.com/'
+
     async def get_supported_tokens(
             self,
             chain_id: ChainId,

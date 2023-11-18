@@ -8,6 +8,9 @@ class GEARBOX(BaseProtocol):
     def get_logo_url(self):
         return 'https://icons.llamao.fi/icons/protocols/gearbox?w=128&h=128'
 
+    def get_project_url(self):
+        return 'https://app.gearbox.fi/pools/'
+
     async def get_supported_tokens(
             self,
             chain_id: ChainId,

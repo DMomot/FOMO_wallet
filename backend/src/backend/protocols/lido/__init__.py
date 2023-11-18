@@ -8,6 +8,9 @@ class LIDO(BaseProtocol):
     def get_logo_url(self):
         return 'https://icons.llamao.fi/icons/protocols/lido?w=128&h=128'
 
+    def get_project_url(self):
+        return 'https://lido.fi/#networks'
+
     async def get_supported_tokens(
             self,
             chain_id: ChainId,
