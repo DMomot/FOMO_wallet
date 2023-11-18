@@ -9,6 +9,9 @@ from backend.protocols.gearbox import GEARBOX
 from backend.protocols.lido import LIDO
 from backend.protocols.spark import SPARK
 
+from web3 import AsyncWeb3, AsyncHTTPProvider
+w3 = AsyncWeb3(AsyncHTTPProvider('https://mainnet.infura.io/v3/ce3a8e24ad4f4ea78dede1bbf11e436b'))
+
 app = FastAPI()
 
 app.add_middleware(
@@ -76,3 +79,8 @@ async def get_fomo_last_month(
     )
 
     return address_info
+
+
+@app.get("/ens/{name}")
+async def get_address_by_ens(name: str):
+    return await w3.ens.address(name)
