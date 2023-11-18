@@ -35,7 +35,10 @@ async def get_fomo_last_month(
     # Add fomo
     for token_info in address_info:
         for protocol in supported_protocols:
-            if token_info['address'] in await protocol.get_supported_tokens(chain_id=token_info['chain_id']):
+            if (
+                    token_info['chain_id'] in await protocol.get_supported_chains()
+                    and token_info['address'] in await protocol.get_supported_tokens(chain_id=token_info['chain_id'])
+            ):
                 protocol_info: dict | None = await protocol.get_apy(
                     underline_token_address=token_info['address'],
                     chain_id=token_info['chain_id'],

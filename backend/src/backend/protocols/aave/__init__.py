@@ -20,6 +20,7 @@ class AAVE(BaseProtocol):
     async def get_supported_chains(self):
         return [
             ChainId.ETH,
+            ChainId.POLYGON,
         ]
 
     async def get_apy(

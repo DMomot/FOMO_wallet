@@ -9,6 +9,6 @@ AddressType = Annotated[str, Len(min_length=42, max_length=42), Predicate(re.com
 
 class ChainId(IntEnum):
     ETH = 1
-    # POLYGON = 137
+    POLYGON = 137
     # GNOSIS = 100
     # ARBITRUM = 42161

@@ -23,7 +23,7 @@ settings = Settings()
 
 node_urls = {
     ChainId.ETH: settings.ethereum_node_url,
-    # ChainId.POLYGON: settings.polygon_node_url,
+    ChainId.POLYGON: settings.polygon_node_url,
     # ChainId.ARBITRUM: settings.arbitrum_node_url,
     # ChainId.GNOSIS: settings.gnosis_node_url,
 }
