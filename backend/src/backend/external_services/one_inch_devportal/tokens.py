@@ -7,7 +7,9 @@ import aiohttp
 from backend.models import ChainId, AddressType
 from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
-
+from shelved_cache import PersistentCache
+from shelved_cache.decorators import asynccached
+from cachetools import LRUCache
 
 async def get_tokens_by_chain_id(
         chain_id: ChainId,
@@ -22,7 +24,10 @@ async def get_tokens_by_chain_id(
         return tokens
 
 
-# @cached(cache=Cache.REDIS, namespace="main", client=cache.client)
+filename = '/tmp/mycache'
+pc = PersistentCache(LRUCache, filename, maxsize=20)
+
+@asynccached(pc)
 async def get_tokens():
     tokens_by_chain_id = await asyncio.gather(
         *(
@@ -30,6 +35,7 @@ async def get_tokens():
             for chain_id in ChainId
         )
     )
+    print('not cached')
     return {
         chain_id: tokens
         for chain_id, tokens in zip(ChainId, tokens_by_chain_id)
@@ -37,4 +43,5 @@ async def get_tokens():
 
 
 if __name__ == '__main__':
-    print(asyncio.run(get_tokens()))
+    x = asyncio.run(get_tokens())
+    print(x.keys())
