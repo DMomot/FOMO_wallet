@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.6
 
 # DOCKER_BUILDKIT=1 docker image build --tag frontend .
-# docker run --rm --name frontend -p 8080:8080 -ti frontend
+# docker run --rm --name frontend -p 127.0.0.1:8080:8080 -ti frontend
 FROM node:20
 
 WORKDIR /app
