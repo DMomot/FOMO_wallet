@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://fomogotchi.duckdns.org/api/', // 
+  baseURL: 'https://fomogotchi.duckdns.org/api/fomo/', // 
   withCredentials: false,
   headers: {
     'Accept': 'application/json',

@@ -1,5 +1,5 @@
 <template>
-  <MainComponent/>
+  <MainComponent />
 </template>
 
 <script>

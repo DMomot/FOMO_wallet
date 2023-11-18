@@ -49,7 +49,7 @@
                     <span class="token-amount">Amount</span>
                     <span class="token-value">Value</span>
                     <span class="token-protocol">Protocol</span>
-                    <span class="token-pnl">Unreal. rewards</span>
+                    <span class="token-pnl">You lost 1Y</span>
                     <span class="token-roi">APY</span>
                 </div>
                 <div v-for="token in tokens"
@@ -132,13 +132,12 @@
 
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
 import ProgressSpinner from 'primevue/progressspinner';
-import { useRoute } from 'vue-router';
 
 import { checkAddress, calculateTotalValues, formatValue } from '@/helpers/index.js'
 import { getFomoVibe } from '@/api/index.js'
@@ -152,7 +151,6 @@ export default {
     name: 'MainComponent',
     setup() {
 
-        const route = useRoute();
         const template_logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsbGx31Hoow8Inq8Tr0TjAsyU4nVkxB4pEGNmPfFfxQ&s'
         let searchQuery = ref('0xd470055c6189b921c4d44b3d277ad868f79c0f75')
         let screen = ref('search')
@@ -162,10 +160,6 @@ export default {
         let isLoading = ref(false);
         let totalFomoValues = ref({})
         let currentAddress = ref('');
-
-        onMounted(() => {
-            currentAddress.value = route.query.param; // Получение параметра маршрута
-        });
 
 
         const FOMOSearch = async () => {
