@@ -42,6 +42,7 @@ async def get_fomo_last_month(
                 )
                 if protocol_info:
                     protocol_info['unrealized_value'] = token_info['value'] * (protocol_info['apy'] / 12)
+
                     if (
                             'additional_info' in protocol_info
                             and 'unrealized_value' in protocol_info['additional_info']
@@ -49,6 +50,7 @@ async def get_fomo_last_month(
                     ):
                         protocol_info['additional_info']['unrealized_value'] = \
                             protocol_info['additional_info']['unrealized_value'](token_info['value'])
+
                     if 'fomo' not in token_info:
                         token_info['fomo'] = [protocol_info]
                     else:
