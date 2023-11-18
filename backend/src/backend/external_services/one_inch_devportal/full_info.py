@@ -16,4 +16,24 @@ async def get_address_info(
             get_spot_prices()
         )
     )
-    # Too many requests to 1inch API =(
+    result = {}
+    for chain_id, chain_tokens in tokens.items():
+        for token_address, token_info in chain_tokens.items():
+            if balances[chain_id].get(token_address):
+                price = spot_prices[chain_id].get(token_address) or 0
+                result[token_address] = {
+                    "address": token_address,
+                    "symbol": token_info["symbol"],
+                    "amount_raw": balances[chain_id][token_address],
+                    "amount": balances[chain_id][token_address] / (10 ** token_info["decimals"]),
+                    "price": price,
+                    "value": balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price,
+                    "logo_url": token_info["logoURI"],
+                    "decimals": token_info["decimals"],
+                }
+
+    return sorted(result, key=lambda x: result[x]["balance"], reverse=True)
+
+
+if __name__ == '__main__':
+    print(asyncio.run(get_address_info('0x7b065Fcb0760dF0CEA8CFd144e08554F3CeA73D1')))

@@ -33,3 +33,6 @@ async def get_balances_by_address(
         chain_id: balances
         for chain_id, balances in zip(ChainId, balances_by_chain_id)
     }
+
+if __name__ == '__main__':
+    print(asyncio.run(get_balances_by_address('0x7b065Fcb0760dF0CEA8CFd144e08554F3CeA73D1')))
