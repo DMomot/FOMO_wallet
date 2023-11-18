@@ -6,6 +6,7 @@ from backend.protocols.aave import AAVE
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.protocols.gearbox import GEARBOX
+from backend.protocols.spark import SPARK
 
 app = FastAPI(
     # openapi_url="/api/openapi.json",
@@ -23,6 +24,7 @@ app.add_middleware(
 supported_protocols = [
     AAVE(),
     GEARBOX(),
+    SPARK(),
 ]
 
 
@@ -42,6 +44,7 @@ async def get_fomo_last_month(
                 )
                 if protocol_info:
                     protocol_info['unrealized_value'] = token_info['value'] * (protocol_info['apy'] / 12)
+                    protocol_info['logo_url'] = protocol.get_logo_url()
 
                     if (
                             'additional_info' in protocol_info

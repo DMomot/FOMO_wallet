@@ -1,12 +1,12 @@
 from backend.models import ChainId, AddressType
 from backend.native_wrapped import native_to_wrapped_mapping
 from backend.protocols.base import BaseProtocol
-from backend.protocols.gearbox.cached_data import state_last_month
+from backend.protocols.spark.cached_data import state_last_month
 
 
-class GEARBOX(BaseProtocol):
+class SPARK(BaseProtocol):
     def get_logo_url(self):
-        return 'https://icons.llamao.fi/icons/protocols/gearbox?w=128&h=128'
+        return 'https://icons.llamao.fi/icons/protocols/spark?w=128&h=128'
 
     async def get_supported_tokens(
             self,

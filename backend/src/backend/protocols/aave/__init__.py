@@ -1,10 +1,13 @@
 from backend.models import ChainId, AddressType
-from backend.native_wrapped import native_to_wrapped_mapping, wrapped_to_native_mapping
+from backend.native_wrapped import native_to_wrapped_mapping
 from backend.protocols.base import BaseProtocol
 from backend.protocols.aave.cached_data import state_last_month
 
 
 class AAVE(BaseProtocol):
+    def get_logo_url(self):
+        return 'https://icons.llamao.fi/icons/protocols/aave?w=128&h=128'
+
     async def get_supported_tokens(
             self,
             chain_id: ChainId,
