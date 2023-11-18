@@ -2,7 +2,7 @@
     <div class="main-container">
         <div v-if="screen=='search'" class="main-container-search">
             <div class="main-header">
-                <div class="main-title">FOMO wallet</div>
+                <div class="main-title">Fomogotchi</div>
             </div>
             <div class="search-container">
                 <InputText type="text" v-model="searchQuery" @keyup.enter="FOMOSearch" placeholder="Enter address" class="search-input"/>

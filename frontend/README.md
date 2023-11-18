@@ -1,4 +1,4 @@
-# fomo_wallet
+# fomogotchi
 
 ## Project setup
 ```
