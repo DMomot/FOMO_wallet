@@ -8,9 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.protocols.gearbox import GEARBOX
 from backend.protocols.spark import SPARK
 
-app = FastAPI(
-    # openapi_url="/api/openapi.json",
-)
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
