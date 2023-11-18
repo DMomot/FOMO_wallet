@@ -11,12 +11,12 @@ ROOT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 rsync -avzP \
     --delete \
     --exclude='/.git' --filter="dir-merge,- .gitignore" \
-    "${ROOT_DIR}/" "root@fomo-wallet.duckdns.org:FOMO_wallet"
+    "${ROOT_DIR}/" "root@fomogotchi.duckdns.org:FOMO_wallet"
 
 # Copy secrets if present. Reuse secrets on server otherwise
-scp "${ROOT_DIR}/backend/.env" "root@fomo-wallet.duckdns.org:FOMO_wallet/backend/.env" || true
+scp "${ROOT_DIR}/backend/.env" "root@fomogotchi.duckdns.org:FOMO_wallet/backend/.env" || true
 
-ssh root@fomo-wallet.duckdns.org "
+ssh root@fomogotchi.duckdns.org "
 set -euo pipefail
 
 cd FOMO_wallet
