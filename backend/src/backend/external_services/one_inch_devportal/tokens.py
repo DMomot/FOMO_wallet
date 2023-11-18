@@ -6,7 +6,7 @@ from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
 from shelved_cache import PersistentCache
 from shelved_cache.decorators import asynccached
-from cachetools import LRUCache
+from cachetools import TTLCache
 
 async def get_tokens_by_chain_id(
         chain_id: ChainId,
@@ -26,7 +26,7 @@ async def get_tokens_by_chain_id(
 
 
 filename = '/tmp/mycache'
-pc = PersistentCache(LRUCache, filename, maxsize=20)
+pc = PersistentCache(TTLCache, filename, maxsize=1024, ttl=600)
 
 @asynccached(pc)
 async def get_tokens():
