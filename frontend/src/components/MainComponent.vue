@@ -2,7 +2,7 @@
     <div class="main-container">
         <div v-if="screen=='search'" class="main-container-search">
             <div class="main-header">
-                <div class="main-title">Fomogotchi</div>
+                <div class="main-title">FomoGotchi</div>
             </div>
             <div class="search-container">
                 <InputText type="text" v-model="searchQuery" @keyup.enter="FOMOSearch" placeholder="Enter address" class="search-input"/>
@@ -23,7 +23,7 @@
                     <div class="total-info-value">{{ formatValue(totalFomoValues.totalValue) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized Profit by 1 month</div>
+                    <div class="total-info-title">Total Unrealized Profit by 1 year</div>
                     <div class="total-info-value">-{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
@@ -35,13 +35,13 @@
                 <h1>Tokens</h1>
             </div>
             <div class="token-list">
-                <div class="token-item">
+                <div class="token-item-header">
                     <span class="token-img"> </span>
                     <span class="token-name">Name</span>
                     <span class="token-amount">Amount</span>
-                    <span class="token-price">Price</span>
                     <span class="token-value">Value</span>
-                    <span class="token-pnl">Unreal. revenue</span>
+                    <span class="token-protocol">Protocol</span>
+                    <span class="token-pnl">Unreal. rewards</span>
                     <span class="token-roi">APY</span>
                 </div>
                 <div v-for="token in tokens"
@@ -57,11 +57,15 @@
                     <span class="token-amount">
                         {{ token.amount.toFixed(4) }} {{ token.symbol }}
                     </span>
-                    <span class="token-price">
-                        {{ token.price.toFixed(4)  }}
-                    </span>
                     <span class="token-value">
                         {{ formatValue(token.amount * token.price) }} $
+                    </span>
+                    <span v-if="token.fomo" class="token-protocol">
+                        <img :src=token.fomo[0].logo_url :alt=key class="protocol-img">
+                        {{ token.fomo[0].protocol_name }}
+                    </span>
+                    <span v-else class="token-protocol">
+                        No potential rewards
                     </span>
                     <span v-if="token.fomo" class="token-pnl">
                         {{formatValue(token.fomo[0].unrealized_value) }} $
@@ -92,15 +96,17 @@
                             <tr v-for="item in dialogData.fomo" :key="item.protocol_name">
                                 <td>{{ item.chain_id }}</td>
                                 <td>{{ item.protocol_name }}</td>
-                                <td>{{ dialogData.name }}</td>
-                                <td>{{ formatValue(item.apy) }}</td>
+                                <td>
+                                    <div class="protocol-img-name">
+                                    <img :src=item.logo_url alt="logo" class="protocol-img-dialog">
+                                    {{ item.protocol_name }}
+                                    </div>
+                                </td>
+                                <td>{{ (100 * item.apy).toFixed(2) }}%</td>
                                 <td>{{ formatValue(item.unrealized_value) }} $</td>
                             </tr>
                         </tbody>
                         </table>
-                    </div>
-                    <div>
-                        {{ dialogData }}
                     </div>
                 </Dialog>
             </div>

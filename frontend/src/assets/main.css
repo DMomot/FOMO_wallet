@@ -40,6 +40,7 @@ html, body {
 
 .token-list {
     padding: 0 35px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .token-item {
@@ -49,6 +50,16 @@ html, body {
     padding: 10px 0;
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
+}
+
+.token-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-weight: 700;
 }
 
 .chain-img {
@@ -78,6 +89,7 @@ html, body {
     justify-content: space-around;
     align-items: center;
     border: 1px solid #ccc;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
   
 .total-info-block {
@@ -105,10 +117,17 @@ html, body {
     width: 200px;
     text-align: end;
 }
-.token-value, .token-name, .token-value, .token-price{
+.token-value, .token-name, .token-value {
     font-size: 16px;
     width: 100px;
     text-align: end;
+}
+
+.token-protocol{
+    font-size: 16px;
+    width: 200px;
+    text-align: end;
+
 }
 
 .token-pnl, .token-roi{
@@ -117,6 +136,17 @@ html, body {
     text-align: end;
 }
 
+.protocol-img{
+    height: 20px;
+    width: 20px;
+    border-radius: 20px;
+}
+
+.protocol-img-dialog{
+    height: 18px;
+    width: 18px;
+    border-radius: 20px;
+}
 
 .main-container-search{
     margin-top: 200px;
@@ -204,7 +234,7 @@ html, body {
   }
   
   .data-table th {
-    background-color: #4CAF50;
+    background-color: burlywood;
     color: white;
   }
   
