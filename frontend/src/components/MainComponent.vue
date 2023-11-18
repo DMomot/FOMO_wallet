@@ -31,8 +31,16 @@
                     <div class="total-info-value">[Значение]</div>
                 </div>
             </div>
-            <div class="tokens-header">
-                <h1>Tokens</h1>
+            <div class="token-header-container">
+                <div class="tokens-header">
+                    <h1>Tokens by chains</h1>
+                </div>
+                <div class="images-container">
+                    <img :src="chainsLogo[1]" alt="Token 1">
+                    <img :src="chainsLogo[2]" alt="Token 2">
+                    <img :src="chainsLogo[3]" alt="Token 3">
+                    <img :src="chainsLogo[4]" alt="Token 4">
+                </div>
             </div>
             <div class="token-list">
                 <div class="token-item-header">

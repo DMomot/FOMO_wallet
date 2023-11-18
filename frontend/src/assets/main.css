@@ -245,3 +245,22 @@ html, body {
   .data-table tr:hover {
     background-color: #ddd;
   }
+
+.token-header-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tokens-header {
+    margin-right: 20px;
+}
+
+.images-container img {
+    margin-right: 10px;
+}
+
+.images-container img {
+    width: 50px;
+    height: auto;
+}
