@@ -71,7 +71,6 @@
                     </span>
                 </div>
                 <Dialog v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :header="'Hi'">
-                    <!-- Здесь ваша дополнительная информация о токене -->
                     <p>{{ dialogData }}</p>
                 </Dialog>
             </div>
@@ -93,7 +92,8 @@ import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { getAllBalances, checkAddress } from '@/helpers/index.js'
+import { checkAddress } from '@/helpers/index.js'
+import { getFomoVibe } from '@/api/index.js'
 export default {
     components: {
       ProgressSpinner,
@@ -113,10 +113,11 @@ export default {
         let currentAddress = ref('')
         let isLoading = ref(false);
 
+
         const FOMOSearch = async () => {
             isLoading.value = true;
             const address = await checkAddress(searchQuery.value)
-            tokens.value = await getAllBalances(address)
+            tokens.value = await getFomoVibe(address)
             currentAddress.value = searchQuery.value
             searchQuery.value = ''
             screen.value = 'result'
