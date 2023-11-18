@@ -32,20 +32,7 @@ async def get_tokens():
             for chain_id in supported_chains
         )
     )
-    print('not cached')
     return {
         chain_id: tokens
         for chain_id, tokens in zip(ChainId, tokens_by_chain_id)
     }
-
-
-if __name__ == '__main__':
-
-    async def main():
-        for x in range(10):
-            await asyncio.sleep(x)
-            t = await get_tokens()
-            print('keys: ', t.keys())
-
-    asyncio.run(main())
-    # print(x.keys())
