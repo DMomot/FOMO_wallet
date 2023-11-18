@@ -28,7 +28,7 @@ supported_protocols = [
 ]
 
 
-@app.get("/{address}")
+@app.get("/fomo/{address}")
 async def get_fomo_last_month(
     address: AddressType,
 ):
