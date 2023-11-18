@@ -1,3 +1,4 @@
+.env
 # Зависимости
 /frontend/node_modules
 /backend/.venv
