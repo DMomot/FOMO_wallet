@@ -27,7 +27,7 @@ supported_protocols = [
 
 
 @app.get("/{address}")
-async def get_fomo(
+async def get_fomo_last_month(
     address: AddressType,
 ):
     address_info = await get_address_info(address=address)
