@@ -24,6 +24,7 @@ async def get_address_info(
                 result[token_address] = {
                     "chain_id": chain_id,
                     "address": token_address,
+                    "name": token_info["name"],
                     "symbol": token_info["symbol"],
                     "amount_raw": balances[chain_id][token_address],
                     "amount": balances[chain_id][token_address] / (10 ** token_info["decimals"]),
