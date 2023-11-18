@@ -11,15 +11,15 @@ ROOT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 rsync -avzP \
     --delete \
     --exclude='/.git' --filter="dir-merge,- .gitignore" \
-    "${ROOT_DIR}/" "root@fomogotchi.duckdns.org:FOMO_wallet"
+    "${ROOT_DIR}/" "root@fomogotchi.duckdns.org:fomogotchi"
 
 # Copy secrets if present. Reuse secrets on server otherwise
-scp "${ROOT_DIR}/backend/.env" "root@fomogotchi.duckdns.org:FOMO_wallet/backend/.env" || true
+scp "${ROOT_DIR}/backend/.env" "root@fomogotchi.duckdns.org:fomogotchi/backend/.env" || true
 
 ssh root@fomogotchi.duckdns.org "
 set -euo pipefail
 
-cd FOMO_wallet
+cd fomogotchi
 
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
     docker compose up -d --force-recreate --build --remove-orphans
