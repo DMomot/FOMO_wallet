@@ -1,5 +1,6 @@
 # Зависимости
 /frontend/node_modules
+/backend/.venv
 
 # Логи
 npm-debug.log*

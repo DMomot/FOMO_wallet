@@ -5,8 +5,12 @@ set -o pipefail # catch errors in pipelines
 set -o nounset  # exit on undeclared variable
 set -o xtrace    # trace execution
 
-rsync -avzP ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
+rsync -avzP --exclude='/.git' --filter="dir-merge,- .gitignore" \
+    ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
+
 ssh root@fomo-wallet.duckdns.org "
+set -euo pipefail
+
 cd FOMO_wallet
 
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
@@ -14,6 +18,9 @@ COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
 
 echo 'Waiting for frontend to start...'
 while ! curl --output /dev/null --silent --head --fail http://127.0.0.1:8080; do sleep 1 ; done
+
+echo 'Waiting for backend to start...'
+while ! curl --output /dev/null --silent --head --fail http://127.0.0.1:8000; do sleep 1 ; done
 
 cp nginx/nginx.conf /etc/nginx/nginx.conf
 nginx -t && systemctl restart nginx

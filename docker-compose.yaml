@@ -5,8 +5,15 @@ services:
     # container_name: frontend
     build:
       context: ./frontend
-      # dockerfile: ./Dockerfile
     ports:
       - "127.0.0.1:8080:8080"
+    # command: >
+    #   poetry run uvicorn app.main:app --host=0.0.0.0 --reload
+  backend:
+    # container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - "127.0.0.1:8000:8000"
     # command: >
     #   poetry run uvicorn app.main:app --host=0.0.0.0 --reload
