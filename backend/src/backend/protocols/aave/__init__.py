@@ -40,4 +40,4 @@ class AAVE(BaseProtocol):
         ]
         if len(res) == 0:
             return None
-        return res[0]
+        return res[0].copy()
