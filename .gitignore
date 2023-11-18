@@ -1,4 +1,6 @@
 .env
+__pycache__/
+.idea/
 # Зависимости
 /frontend/node_modules
 /backend/.venv
