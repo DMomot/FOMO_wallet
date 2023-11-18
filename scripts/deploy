@@ -5,7 +5,9 @@ set -o pipefail # catch errors in pipelines
 set -o nounset  # exit on undeclared variable
 set -o xtrace    # trace execution
 
-rsync -avzP --exclude='/.git' --filter="dir-merge,- .gitignore" \
+rsync -avzP \
+    --delete \
+    --exclude='/.git' --filter="dir-merge,- .gitignore" \
     ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
 
 ssh root@fomo-wallet.duckdns.org "
