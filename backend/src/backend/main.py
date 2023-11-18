@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 
+from backend.models import AddressType
+
 app = FastAPI()
 
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@app.get("/ping")
-async def ping():
-    return "pong"
+async def f(
+        address: AddressType = '0x7b065Fcb0760dF0CEA8CFd144e08554F3CeA73D1',
+):
+    ...
