@@ -7,7 +7,7 @@ set -o xtrace    # trace execution
 
 ROOT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )/.." &> /dev/null && pwd )
 
-# Sync state on server; doesn't delete gitignored files
+# Sync state on server; doesn't delete gitignored files on remote
 rsync -avzP \
     --delete \
     --exclude='/.git' --filter="dir-merge,- .gitignore" \
