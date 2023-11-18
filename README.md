@@ -18,5 +18,9 @@ It ain't scam if it ain't a financial advice!
 
 ## `/dev/random`
 
-1. Q: What added to the standard `nginx.conf`?
-    * A: `git diff -w fec605d -- nginx/`
+1. What added to the standard `nginx.conf`?
+    * `git diff -w fec605d -- nginx/`
+2. IaaR: Infrastructure as a `README.md`
+    * [How to install Nginx on Ubuntu 20.04](https://community.hetzner.com/tutorials/how-to-install-nginx-on-ubuntu-20-04)
+    * [Add SSL Certificate with Lets Encrypt to Nginx on Ubuntu 20.04](https://community.hetzner.com/tutorials/add-ssl-certificate-with-lets-encrypt-to-nginx-on-ubuntu-20-04)
+    * [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
