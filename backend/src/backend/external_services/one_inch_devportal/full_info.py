@@ -22,6 +22,7 @@ async def get_address_info(
             if balances[chain_id].get(token_address):
                 price = spot_prices[chain_id].get(token_address) or 0
                 result[token_address] = {
+                    "chain_id": chain_id,
                     "address": token_address,
                     "symbol": token_info["symbol"],
                     "amount_raw": balances[chain_id][token_address],
