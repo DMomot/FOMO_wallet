@@ -1,11 +1,10 @@
 import asyncio
 
-from backend.cache import cache
+from backend.cache import momoized_async
 from backend.logger import log
 from backend.models import ChainId, AddressType
 from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
-from shelved_cache.decorators import asynccached
 
 
 async def get_tokens_by_chain_id(
@@ -25,7 +24,7 @@ async def get_tokens_by_chain_id(
         return tokens
 
 
-@asynccached(cache)
+@momoized_async()
 async def get_tokens():
     tokens_by_chain_id = await asyncio.gather(
         *(
@@ -41,5 +40,12 @@ async def get_tokens():
 
 
 if __name__ == '__main__':
-    x = asyncio.run(get_tokens())
-    print(x.keys())
+
+    async def main():
+        for x in range(10):
+            await asyncio.sleep(x)
+            t = await get_tokens()
+            print('keys: ', t.keys())
+
+    asyncio.run(main())
+    # print(x.keys())
