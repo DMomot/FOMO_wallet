@@ -6,6 +6,7 @@ from backend.protocols.aave import AAVE
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.protocols.gearbox import GEARBOX
+from backend.protocols.lido import LIDO
 from backend.protocols.spark import SPARK
 
 app = FastAPI()
@@ -23,6 +24,7 @@ supported_protocols = [
     AAVE(),
     GEARBOX(),
     SPARK(),
+    LIDO(),
 ]
 
 
