@@ -2,7 +2,7 @@ import asyncio
 
 from backend.cache import momoized_async
 from backend.logger import log
-from backend.models import ChainId, AddressType
+from backend.models import ChainId, AddressType, supported_chains
 from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
 
@@ -12,7 +12,7 @@ async def get_tokens_by_chain_id(
         chain_id: ChainId,
 ):
     async with RetryClient(
-            retry_options=RandomRetry(statuses=[429], attempts=10, min_timeout=1, max_timeout=1),
+            retry_options=RandomRetry(statuses=[429], attempts=20, min_timeout=1, max_timeout=1),
             logger=log,
     ) as client:
         async with client.request(
@@ -29,7 +29,7 @@ async def get_tokens():
     tokens_by_chain_id = await asyncio.gather(
         *(
             get_tokens_by_chain_id(chain_id)
-            for chain_id in ChainId
+            for chain_id in supported_chains
         )
     )
     print('not cached')

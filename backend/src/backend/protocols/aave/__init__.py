@@ -12,7 +12,7 @@ class AAVE(BaseProtocol):
             self,
             chain_id: ChainId,
     ):
-        supported_tokens = [x['underline_token_address'] for x in state_last_month[chain_id]]
+        supported_tokens = [x['underlying_token_address'] for x in state_last_month[chain_id]]
         if chain_id in native_to_wrapped_mapping:
             supported_tokens += list(native_to_wrapped_mapping[chain_id].keys())
         return set(supported_tokens)
@@ -25,15 +25,15 @@ class AAVE(BaseProtocol):
 
     async def get_apy(
             self,
-            underline_token_address: AddressType,
+            underlying_token_address: AddressType,
             chain_id: ChainId,
     ):
-        if underline_token_address in native_to_wrapped_mapping[chain_id]:
-            underline_token_address = native_to_wrapped_mapping[chain_id][underline_token_address]
+        if underlying_token_address in native_to_wrapped_mapping[chain_id]:
+            underlying_token_address = native_to_wrapped_mapping[chain_id][underlying_token_address]
 
         res = [
             x for x in state_last_month[chain_id]
-            if x['underline_token_address'].lower() == underline_token_address.lower()
+            if x['underlying_token_address'].lower() == underlying_token_address.lower()
         ]
         if len(res) == 0:
             return None

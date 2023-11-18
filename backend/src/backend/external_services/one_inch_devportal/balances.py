@@ -4,7 +4,7 @@ from aiohttp_retry import RetryClient, RandomRetry
 
 from backend.cache import momoized_async
 from backend.logger import log
-from backend.models import ChainId, AddressType
+from backend.models import ChainId, AddressType, supported_chains
 from backend.config import settings
 
 
@@ -14,7 +14,7 @@ async def get_balances_by_chain_id_and_address(
         address: AddressType,
 ):
     async with RetryClient(
-            retry_options=RandomRetry(statuses=[429], attempts=10, min_timeout=0.5, max_timeout=0.5),
+            retry_options=RandomRetry(statuses=[429], attempts=20, min_timeout=0.5, max_timeout=0.5),
             logger=log,
     ) as client:
         async with client.request(
@@ -33,7 +33,7 @@ async def get_balances_by_address(
     balances_by_chain_id = await asyncio.gather(
         *(
             get_balances_by_chain_id_and_address(chain_id, address)
-            for chain_id in ChainId
+            for chain_id in supported_chains
         )
     )
     return {

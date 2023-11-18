@@ -11,5 +11,5 @@ class BaseProtocol:
     async def get_supported_tokens(self, chain_id: ChainId):
         raise NotImplementedError
 
-    async def get_apy(self, underline_token_address: AddressType, chain_id: ChainId):
+    async def get_apy(self, underlying_token_address: AddressType, chain_id: ChainId):
         raise NotImplementedError

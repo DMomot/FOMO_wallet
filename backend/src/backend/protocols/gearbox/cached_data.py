@@ -5,7 +5,7 @@ state_last_month = {
         {
             "chain_id": 1,
             "protocol_name": "GEARBOX",
-            "underline_token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+            "underlying_token_address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
             "apy": 0.0044498683043550,
             "additional_info": {
                 "description": "APY / Unrealized value in GEAR tokens",
@@ -17,7 +17,7 @@ state_last_month = {
         {
             "chain_id": 1,
             "protocol_name": "GEARBOX",
-            "underline_token_address": "0x24946bcbbd028d5abb62ad9b635eb1b1a67af668",
+            "underlying_token_address": "0x24946bcbbd028d5abb62ad9b635eb1b1a67af668",
             "apy": 0.0040174116509912,
             "additional_info": {
                 "description": "APY / Unrealized value in GEAR tokens",
@@ -29,7 +29,7 @@ state_last_month = {
         {
             "chain_id": 1,
             "protocol_name": "GEARBOX",
-            "underline_token_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+            "underlying_token_address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
             "apy": 0.0094212180037720,
             "additional_info": {
                 "description": "APY / Unrealized value in GEAR tokens",
@@ -41,7 +41,7 @@ state_last_month = {
         {
             "chain_id": 1,
             "protocol_name": "GEARBOX",
-            "underline_token_address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+            "underlying_token_address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
             "apy": 0.0000000000000000,
             "additional_info": {
                 "description": "APY / Unrealized value in GEAR tokens",

@@ -3,7 +3,7 @@ import asyncio
 from aiohttp_retry import RetryClient, RandomRetry
 
 from backend.cache import momoized_async
-from backend.models import ChainId, AddressType
+from backend.models import ChainId, AddressType, supported_chains
 from backend.config import settings
 from backend.logger import log
 
@@ -13,7 +13,7 @@ async def get_spot_prices_by_chain_id(
         chain_id: ChainId,
 ):
     async with RetryClient(
-            retry_options=RandomRetry(statuses=[429], attempts=10, min_timeout=0.5, max_timeout=0.5),
+            retry_options=RandomRetry(statuses=[429], attempts=20, min_timeout=0.5, max_timeout=0.5),
             logger=log,
     ) as client:
         async with client.request(
@@ -31,7 +31,7 @@ async def get_spot_prices() -> dict[ChainId, dict[AddressType, float]]:
     balances_by_chain_id = await asyncio.gather(
         *(
             get_spot_prices_by_chain_id(chain_id)
-            for chain_id in ChainId
+            for chain_id in supported_chains
         )
     )
     return {
