@@ -13,5 +13,9 @@ services:
       context: ./backend
     ports:
       - "127.0.0.1:8000:8000"
+    volumes:
+      - type: bind
+        source: ./backend/.env
+        target: /app/.env
     # command: >
     #   poetry run uvicorn app.main:app --host=0.0.0.0 --reload

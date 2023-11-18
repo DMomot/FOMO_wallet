@@ -1,7 +1,7 @@
-# syntax=docker/dockerfile:1.3
+# syntax=docker/dockerfile:1.6
 
-# DOCKER_BUILDKIT=1 docker build -t backend .
-# docker run --rm --name backend --net=host -v ${PWD}/.secrets.toml:/app/.secrets.toml:ro -ti backend -- uvicorn backend.main:app --port=8000
+# DOCKER_BUILDKIT=1 docker image build --tag backend .
+# docker run --rm --name backend -v ${PWD}/.env:/app/.env:ro -ti backend
 
 FROM python:3.11
 ENV PYTHONUNBUFFERED=1
