@@ -36,10 +36,10 @@
                     <h1>Tokens by chains</h1>
                 </div>
                 <div class="images-container">
-                    <img :src="chainsLogo[1]" alt="Token 1">
-                    <img :src="chainsLogo[2]" alt="Token 2">
-                    <img :src="chainsLogo[3]" alt="Token 3">
-                    <img :src="chainsLogo[4]" alt="Token 4">
+                    <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
+                    <img :src="chainsLogo[137]" alt="Token 2">
+                    <img :src="chainsLogo[42161]" alt="Token 3">
+                    <img :src="chainsLogo[100]" alt="Token 4">
                 </div>
             </div>
             <div class="token-list">
