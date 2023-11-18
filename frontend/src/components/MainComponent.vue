@@ -68,7 +68,7 @@
                         No potential rewards
                     </span>
                     <span v-if="token.fomo" class="token-pnl">
-                        {{formatValue(token.fomo[0].unrealized_value) }} $
+                        {{ formatValue(token.fomo[0].unrealized_value) }} $
                     </span>
                     <span v-else class="token-pnl">
                         0
@@ -107,6 +107,9 @@
                             </tr>
                         </tbody>
                         </table>
+                    </div>
+                    <div>
+                        {{ dialogData }}
                     </div>
                 </Dialog>
             </div>
