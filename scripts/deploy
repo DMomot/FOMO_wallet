@@ -3,8 +3,18 @@
 set -o errexit  # exit on fail
 set -o pipefail # catch errors in pipelines
 set -o nounset  # exit on undeclared variable
-# set -o xtrace    # trace execution
+set -o xtrace    # trace execution
 
 rsync -avzP ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
-ssh root@fomo-wallet.duckdns.org 'cp FOMO_wallet/nginx/nginx.conf /etc/nginx/nginx.conf'
-ssh root@fomo-wallet.duckdns.org 'nginx -t && systemctl restart nginx'
+ssh root@fomo-wallet.duckdns.org "
+cd FOMO_wallet
+
+COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 \
+    docker compose up -d --force-recreate --build --remove-orphans
+
+echo 'Waiting for frontend to start...'
+while ! curl --output /dev/null --silent --head --fail http://127.0.0.1:8080; do sleep 1 ; done
+
+cp nginx/nginx.conf /etc/nginx/nginx.conf
+nginx -t && systemctl restart nginx
+"
