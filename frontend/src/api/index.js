@@ -7,7 +7,7 @@ const apiClient = axios.create({
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'X-API-Key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6Ijk0NTJjYTQ4LWQ0MjUtNGU1MC04ZmU5LTc5Y2E1Y2U5MzQxNSIsIm9yZ0lkIjoiMjc1OTYwIiwidXNlcklkIjoiMjgxNDM1IiwidHlwZUlkIjoiYjAxYTcwZjYtM2RjNy00MGZhLWFiYWItZTk0NTVlNjE4YWYzIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE2ODg4MTI2MTMsImV4cCI6NDg0NDU3MjYxM30.fp7-zUy5bp8AqO1imKM6Yl7f2qJ7ji1ZCZ0r9ELfC6E'
+    'X-API-Key': process.env.VUE_APP_API_URL
   }
 });
 

@@ -12,6 +12,95 @@
     height: 100vh;
 }
 
+.search-container-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.address-title{
+    font-size: 20px;
+    font-weight: 800;
+    position: relative;
+    margin: 30px 0;
+}
+
+.tokens-header{
+    font-size: 25px;
+    font-weight: 800;
+    position: relative;
+    margin-bottom: 20px;
+
+}
+
+.token-list {
+    padding: 0 35px;
+}
+.token-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.chain-img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 40%;
+    border-radius: 50%;
+    border: solid 2px #fff;
+}
+
+.img-container{
+    position: relative;
+    display: inline-block;
+}
+
+.token-img {
+    width: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.main-total-container {
+    width: 1000px;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #ccc; /* Для наглядности */
+}
+  
+.total-info-block {
+    flex: 1;
+    text-align: center;
+}
+  
+.total-info-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+  
+.total-info-value {
+    font-size: 16px;
+}
+
+.token-name {
+    font-size: 16px;
+    width: 100px;
+}
+.token-amount, .token-value, .token-name, .token-value, .token-pnl, .token-roi, .token-price{
+    font-size: 16px;
+    width: 100px;
+    text-align: end;
+}
+
+
 .main-container-search{
     width: 1000px;
 }
