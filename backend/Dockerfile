@@ -28,5 +28,5 @@ RUN poetry install
 EXPOSE 8000
 
 ENTRYPOINT [ "poetry", "run" ]
-# CMD [ "uvicorn", "backend.main:app", "--proxy-headers", "--host=0.0.0.0", "--port=8000" ]
-CMD [ "gunicorn", "backend.main:app", "--workers", "3", "--enable-stdio-inheritance", "--log-level", "debug", "--access-logfile", "-", "--error-logfile", "-", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000" ]
+CMD [ "uvicorn", "backend.main:app", "--proxy-headers", "--host=0.0.0.0", "--port=8000" ]
+# CMD [ "gunicorn", "backend.main:app", "--workers", "3", "--enable-stdio-inheritance", "--log-level", "debug", "--access-logfile", "-", "--error-logfile", "-", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000" ]
