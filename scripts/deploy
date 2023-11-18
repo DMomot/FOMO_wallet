@@ -6,3 +6,5 @@ set -o nounset  # exit on undeclared variable
 # set -o xtrace    # trace execution
 
 rsync -avzP ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
+ssh root@fomo-wallet.duckdns.org 'cp FOMO_wallet/nginx/nginx.conf /etc/nginx/nginx.conf'
+ssh root@fomo-wallet.duckdns.org 'nginx -t && systemctl restart nginx'
