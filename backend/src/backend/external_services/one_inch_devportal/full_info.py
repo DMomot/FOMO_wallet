@@ -16,12 +16,12 @@ async def get_address_info(
             get_spot_prices()
         )
     )
-    result = {}
+    result = []
     for chain_id, chain_tokens in tokens.items():
         for token_address, token_info in chain_tokens.items():
             if balances[chain_id].get(token_address):
                 price = spot_prices[chain_id].get(token_address) or 0
-                result[token_address] = {
+                result.append({
                     "chain_id": chain_id,
                     "address": token_address,
                     "name": token_info["name"],
@@ -32,9 +32,9 @@ async def get_address_info(
                     "value": balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price,
                     "logo_url": token_info["logoURI"],
                     "decimals": token_info["decimals"],
-                }
+                })
 
-    return dict(sorted(result.items(), key=lambda kv: kv[1]["value"], reverse=True))
+    return list(sorted(result, key=lambda x: x["value"], reverse=True))
 
 
 if __name__ == '__main__':

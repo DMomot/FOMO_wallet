@@ -33,11 +33,11 @@ async def get_fomo_last_month(
     address_info = await get_address_info(address=address)
 
     # Add fomo
-    for token_address, token_info in address_info.items():
+    for token_info in address_info:
         for protocol in supported_protocols:
-            if token_address in await protocol.get_supported_tokens(chain_id=token_info['chain_id']):
+            if token_info['address'] in await protocol.get_supported_tokens(chain_id=token_info['chain_id']):
                 protocol_info: dict | None = await protocol.get_apy(
-                    underline_token_address=token_address,
+                    underline_token_address=token_info['address'],
                     chain_id=token_info['chain_id'],
                 )
                 if protocol_info:
@@ -55,7 +55,7 @@ async def get_fomo_last_month(
                         token_info['fomo'].append(protocol_info)
 
     # Sorted by unrealized_value
-    for token_address, token_info in address_info.items():
+    for token_info in address_info:
         if 'fomo' in token_info:
             token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
 
