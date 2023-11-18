@@ -7,6 +7,7 @@ from backend.config import settings
 from aiohttp_retry import RetryClient, RandomRetry
 
 
+@momoized_async(ttl=60 * 60 * 6)
 async def get_tokens_by_chain_id(
         chain_id: ChainId,
 ):
@@ -24,7 +25,6 @@ async def get_tokens_by_chain_id(
         return tokens
 
 
-@momoized_async()
 async def get_tokens():
     tokens_by_chain_id = await asyncio.gather(
         *(

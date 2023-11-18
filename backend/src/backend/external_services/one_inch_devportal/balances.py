@@ -2,11 +2,13 @@ import asyncio
 
 from aiohttp_retry import RetryClient, RandomRetry
 
+from backend.cache import momoized_async
 from backend.logger import log
 from backend.models import ChainId, AddressType
 from backend.config import settings
 
 
+@momoized_async(ttl=60 * 10)
 async def get_balances_by_chain_id_and_address(
         chain_id: ChainId,
         address: AddressType,

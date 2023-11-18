@@ -2,11 +2,13 @@ import asyncio
 
 from aiohttp_retry import RetryClient, RandomRetry
 
+from backend.cache import momoized_async
 from backend.models import ChainId, AddressType
 from backend.config import settings
 from backend.logger import log
 
 
+@momoized_async(ttl=60 * 10)
 async def get_spot_prices_by_chain_id(
         chain_id: ChainId,
 ):
