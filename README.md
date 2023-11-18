@@ -34,3 +34,4 @@ It ain't scam if it ain't a financial advice!
     * [How to install Nginx on Ubuntu 20.04](https://community.hetzner.com/tutorials/how-to-install-nginx-on-ubuntu-20-04)
     * [Add SSL Certificate with Lets Encrypt to Nginx on Ubuntu 20.04](https://community.hetzner.com/tutorials/add-ssl-certificate-with-lets-encrypt-to-nginx-on-ubuntu-20-04)
     * [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+3. `ssh-import-id gh:ksetherg gh:lainiwa gh:git-alice gh:Damir21 gh:DMomot gh:juwizd`
