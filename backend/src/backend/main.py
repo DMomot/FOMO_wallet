@@ -69,10 +69,10 @@ async def get_fomo_last_month(
             token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
 
     # Sorted by max(fomo.unrealized_value)
-    # address_info = sorted(
-    #     address_info,
-    #     key=lambda x: max(x.get('unrealized_value', 0) for x in x.get('fomo', [0])),
-    #     reverse=True
-    # )
+    address_info = sorted(
+        address_info,
+        key=lambda x: max(x['unrealized_value'] for x in x.get('fomo', [{'unrealized_value': 0}])),
+        reverse=True
+    )
 
     return address_info
