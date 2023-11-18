@@ -31,6 +31,8 @@ async def get_fomo(
     address: AddressType,
 ):
     address_info = await get_address_info(address=address)
+
+    # Add fomo
     for token_address, token_info in address_info.items():
         for protocol in supported_protocols:
             if token_address in await protocol.get_supported_tokens(chain_id=token_info['chain_id']):
@@ -44,4 +46,10 @@ async def get_fomo(
                         token_info['fomo'] = [protocol_info]
                     else:
                         token_info['fomo'].append(protocol_info)
+
+    # Sorted by unrealized_value
+    for token_address, token_info in address_info.items():
+        if 'fomo' in token_info:
+            token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
+
     return address_info
