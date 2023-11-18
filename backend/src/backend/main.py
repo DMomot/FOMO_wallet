@@ -5,6 +5,8 @@ from backend.models import AddressType
 from backend.protocols.aave import AAVE
 from fastapi.middleware.cors import CORSMiddleware
 
+from backend.protocols.gearbox import GEARBOX
+
 app = FastAPI(
     # openapi_url="/api/openapi.json",
 )
@@ -20,6 +22,7 @@ app.add_middleware(
 
 supported_protocols = [
     AAVE(),
+    GEARBOX(),
 ]
 
 
