@@ -1,36 +1,50 @@
 <template>
     <div class="main-container">
-        Hello world
-        <div class="top-right-buttons">
-            <!-- <Button severity="info" rounded v-if="!isConnected" id="connectWallet" class="connect-button" @click="enableEthereum" label="Connect wallet" />
-            <Button severity="info" rounded v-else id="disconnectWallet" class="disconnect-button" :label=shortAddress(currentAccount) /> -->
+        <div v-if="screen=='search'" class="main-container-search">
+            <div class="main-header">
+                <div class="main-title">FOMO wallet</div>
+            </div>
+            <div class="search-container">
+                <InputText type="text" v-model="searchQuery" @keyup.enter="performSearch" placeholder="Enter address" class="search-input"/>
+                <Button @click="performSearch" class="search-button" label="Search"/>
+            </div>
+        </div>
+        <div v-else class="main-container-result">
+            
         </div>
     </div>
 </template>
 
 
 <script>
-// import { ref, onMounted } from 'vue';
-// import tokensInfo from '@/info/tokensInfo.json';
-// import { shortAddress, formatNumber } from '@/helpers/helpers.js';
-// import { signPermit } from '@/signatures/permit.js';
-// import { signMetaTransaction } from '@/signatures/metaTransaction.js';
-// import InputText from 'primevue/inputtext';
-// import Button from 'primevue/button';
+import { ref } from 'vue';
+import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
 // import ProgressSpinner from 'primevue/progressspinner';
-// import { getChains, 
-//          getBalances, 
-//          getRoutes, 
-//          getRouterInfo, 
-//          getTokenInfo, 
-//          getBridgesInfo,
-//          sendTransaction} from '@/api/index.js'
+import { getAllBalances } from '@/helpers/index.js'
 export default {
     components: {
-    //   InputText,
-    //   Button,
-    //   ProgressSpinner
+      InputText,
+      Button,
     },
     name: 'MainComponent',
+    setup() {
+        let searchQuery = ref('0xd470055c6189b921c4d44b3d277ad868f79c0f75')
+        let screen = ref('search')
+
+        const performSearch = async () => {
+            const balances = await getAllBalances(searchQuery.value)
+            console.log(balances)
+            screen.value = 'result'
+        }
+
+        return {
+            performSearch,
+            searchQuery,
+            screen
+        }
+    }
 }
+
+
 </script>

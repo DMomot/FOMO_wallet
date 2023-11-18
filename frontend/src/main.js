@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// import './assets/main.css';
+import './assets/main.css';
 import PrimeVue from 'primevue/config';
 import 'primevue/resources/themes/saga-blue/theme.css'; // Или другую тему
 import 'primevue/resources/primevue.min.css';
