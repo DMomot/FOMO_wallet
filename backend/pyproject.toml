@@ -16,6 +16,7 @@ aiocache = "^0.12.2"
 gunicorn = "^21.2.0"
 aiohttp-retry = "^2.8.3"
 shelved-cache = "^0.3.1"
+structlog = "^23.2.0"
 
 
 [build-system]
