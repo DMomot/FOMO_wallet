@@ -4,7 +4,17 @@
 It ain't scam if it ain't a financial advice!
 
 
-## Run
+## Run Locally
+
+1. Run backend:
+    * `python3.11 -m venv .venv`
+    * `poetry install`
+    * `poetry run uvicorn backend.main:app`
+2. Run frontend:
+    * `yarn`
+    * `yarn serve`
+
+## Run Remotely
 
 1. Deploy:
     * `./scripts/deploy`. Orc CI/CD goes brrr...
