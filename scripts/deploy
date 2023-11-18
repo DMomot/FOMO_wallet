@@ -5,12 +5,14 @@ set -o pipefail # catch errors in pipelines
 set -o nounset  # exit on undeclared variable
 set -o xtrace    # trace execution
 
+# Sync state on server; doesn't delete gitignored files
 rsync -avzP \
     --delete \
     --exclude='/.git' --filter="dir-merge,- .gitignore" \
     ../FOMO_wallet/ root@fomo-wallet.duckdns.org:FOMO_wallet
 
-scp backend/.env root@fomo-wallet.duckdns.org:FOMO_wallet/backend/.env
+# Copy secrets if present. Reuse secrets on server otherwise
+scp ../FOMO_wallet/backend/.env root@fomo-wallet.duckdns.org:FOMO_wallet/backend/.env || true
 
 ssh root@fomo-wallet.duckdns.org "
 set -euo pipefail
