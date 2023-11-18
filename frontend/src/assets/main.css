@@ -120,7 +120,7 @@
     margin-right: 10px;
     border-radius: 20px;
     outline: none;
-    width: 400px;
+    width: 425px;
 }
 
 .search-button {
@@ -137,3 +137,24 @@
 .search-button:hover {
     background-color: #357ae8;
 }
+
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(211, 211, 211, 0.5); /* Светло-серый прозрачный фон */
+    z-index: 1000; /* Убедитесь, что он выше других элементов */
+  }
+  
+.spinner-container {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

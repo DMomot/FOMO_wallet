@@ -76,6 +76,11 @@
                 </Dialog>
             </div>
         </div>
+        <div v-if="isLoading" class="custom-modal">
+            <div class="spinner-container">
+                <ProgressSpinner />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -86,11 +91,12 @@ import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
-// import ProgressSpinner from 'primevue/progressspinner';
+import ProgressSpinner from 'primevue/progressspinner';
 
 import { getAllBalances, checkAddress } from '@/helpers/index.js'
 export default {
     components: {
+      ProgressSpinner,
       Dialog,
       InputText,
       Button,
@@ -105,13 +111,16 @@ export default {
         let dialogVisible = ref(false);
         let dialogData = ref({});
         let currentAddress = ref('')
+        let isLoading = ref(false);
 
         const FOMOSearch = async () => {
+            isLoading.value = true;
             const address = await checkAddress(searchQuery.value)
             tokens.value = await getAllBalances(address)
             currentAddress.value = searchQuery.value
             searchQuery.value = ''
             screen.value = 'result'
+            isLoading.value = false;
         }
 
         const showModal = (token) => {
@@ -128,8 +137,10 @@ export default {
             dialogData,
             chainsLogo,
             tokens,
+            ProgressSpinner,
             searchQuery,
-            screen
+            screen,
+            isLoading
         }
     }
 }
