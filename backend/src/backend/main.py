@@ -34,6 +34,13 @@ supported_protocols = [
 ]
 
 
+def sort_func(address_info):
+    if 'fomo' in address_info and len(address_info['fomo']) > 0:
+        return max(x['unrealized_value'] for x in address_info['fomo'])
+    else:
+        return 0
+
+
 @app.get("/fomo/{address}")
 async def get_fomo_last_month(
     address: AddressType,
@@ -92,10 +99,11 @@ async def get_fomo_last_month(
     for token_info in address_info:
         if 'fomo' in token_info:
             token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
+
     # Sorted by max(fomo.unrealized_value)
     address_info = sorted(
         address_info,
-        key=lambda x: max(x['unrealized_value'] for x in x.get('fomo', [{'unrealized_value': 0}])),
+        key=sort_func,
         reverse=True
     )
 
