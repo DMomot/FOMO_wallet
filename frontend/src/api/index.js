@@ -5,8 +5,7 @@ const apiClient = axios.create({
   withCredentials: false,
   headers: {
     'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'X-API-Key': process.env.VUE_APP_API_URL
+    'Content-Type': 'application/json'
   }
 });
 

@@ -28,7 +28,7 @@
                     <div class="total-info-value-ul">{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized APR</div>
+                    <div class="total-info-title">Total Unrealized APY</div>
                     <div class="total-info-value">{{ 100 * formatValue(totalFomoValues.totalUP/totalFomoValues.totalValue) }} %</div>
                 </div>
             </div>
