@@ -54,8 +54,8 @@ async def get_fomo_last_month(
                 if apys:
                     d_apys = deepcopy(apys)
                     for apy in d_apys:
-                        apy['unrealized_value'] = token_info['value'] * (apy['apy'])
-                        apy['unrealized_amount'] = token_info['amount'] * (apy['apy'])
+                        apy['unrealized_value'] = round(token_info['value'] * (apy['apy']))
+                        apy['unrealized_amount'] = round(token_info['amount'] * (apy['apy']))
                         apy['logo_url'] = protocol.get_logo_url()
                         apy['project_url'] = protocol.get_project_url()
 
