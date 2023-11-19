@@ -45,13 +45,13 @@ state_last_month = {
             'chain_id': 100,
             'protocol_name': 'SPARK',
             'underlying_token_address': '0x6a023ccd1ff6f2045c3309768ead9e68f978f6e1',
-            'apy': '0.004512236803010605'
+            'apy': 0.004512236803010605
         },
         {
             'chain_id': 100,
             'protocol_name': 'SPARK',
             'underlying_token_address': '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
-            'apy': '0.026543872000388546'
+            'apy': 0.026543872000388546
         },
     ]
 }
