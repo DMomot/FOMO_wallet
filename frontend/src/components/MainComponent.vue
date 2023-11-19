@@ -29,7 +29,7 @@
                 </div>
                 <div class="total-info-block">
                     <div class="total-info-title">Total Unrealized APY</div>
-                    <div class="total-info-value">{{ 100 * formatValue(totalFomoValues.totalUP/totalFomoValues.totalValue) }} %</div>
+                    <div class="total-info-value">{{ (100 * totalFomoValues.totalUP/totalFomoValues.totalValue).toFixed(2) }} %</div>
                 </div>
             </div>
             <div class="token-header-container">
