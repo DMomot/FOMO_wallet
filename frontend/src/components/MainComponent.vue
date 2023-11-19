@@ -163,7 +163,7 @@ export default {
         const route = useRoute();
 
         let currentAddress = ref('');
-        let searchQuery = ref('0xd470055c6189b921c4d44b3d277ad868f79c0f75')
+        let searchQuery = ref('')
         
 
         watch(() => route.params, (newParams) => {
