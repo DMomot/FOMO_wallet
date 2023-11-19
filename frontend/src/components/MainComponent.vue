@@ -18,6 +18,14 @@
             <div class="address-header">
                 <div class="address-title">Address {{ currentAddress }}</div>
             </div>
+          <div class="token-header-container">
+                <div class="images-container">
+                    <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
+                    <img :src="chainsLogo[137]" alt="Token 2">
+                    <img :src="chainsLogo[42161]" alt="Token 3">
+                    <img :src="chainsLogo[100]" alt="Token 4">
+                </div>
+            </div>
             <div class="main-total-container">
                 <div class="total-info-block">
                     <div class="total-info-title">Total Value</div>
@@ -28,19 +36,9 @@
                     <div class="total-info-value-ul">{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized APY</div>
-                    <div class="total-info-value">{{ (100 * totalFomoValues.totalUP/totalFomoValues.totalValue).toFixed(2) }} %</div>
-                </div>
-            </div>
-            <div class="token-header-container">
-                <div class="tokens-header">
-                    <h1>Tokens by chains</h1>
-                </div>
-                <div class="images-container">
-                    <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
-                    <img :src="chainsLogo[137]" alt="Token 2">
-                    <img :src="chainsLogo[42161]" alt="Token 3">
-                    <img :src="chainsLogo[100]" alt="Token 4">
+                    <div class="total-info-title">Total Unrealized APR</div>
+                  {{totalFomoValues}}
+                    <div class="total-info-value">{{ formatValue(100 * totalFomoValues.totalUP/totalFomoValues.totalValue) }} %</div>
                 </div>
             </div>
             <div class="token-list">
@@ -65,7 +63,7 @@
                     </div>
                     <span class="token-name">{{ token.name }}</span>
                     <span class="token-amount">
-                        {{ formatValue(token.amount) }} {{ token.symbol }}
+                        {{ token.amount.toFixed(4) }} {{ token.symbol }}
                     </span>
                     <span class="token-value">
                         {{ formatValue(token.amount * token.price) }} $
