@@ -19,7 +19,7 @@ async def get_address_info(
     result = []
     for chain_id, chain_tokens in tokens.items():
         for token_address, token_info in chain_tokens.items():
-            if balances[chain_id].get(token_address):
+            if balances[chain_id].get(token_address) and 'logoURI' in token_info:
                 price = spot_prices[chain_id].get(token_address) or 0
                 result.append({
                     "chain_id": chain_id,
