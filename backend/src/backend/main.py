@@ -53,13 +53,16 @@ async def get_fomo_last_month(
                 )
 
                 if apys:
-                    d_apys = deepcopy(apys)
-                    for apy in d_apys:
+                    apys_returned = []
+                    for apy in deepcopy(apys):
                         unrealized_value = token_info['value'] * apy['apy']
                         if unrealized_value < 100:
                             apy['unrealized_value'] = round(unrealized_value, 2)
                         else:
                             apy['unrealized_value'] = round(unrealized_value)
+
+                        if unrealized_value == 0:
+                            continue
 
                         unrealized_amount = token_info['amount'] * apy['apy']
                         if unrealized_amount < 100:
@@ -78,10 +81,12 @@ async def get_fomo_last_month(
                             apy['additional_info']['unrealized_value'] = \
                                 apy['additional_info']['unrealized_value'](token_info['value'])
 
+                        apys_returned.append(apy)
+
                     if 'fomo' not in token_info:
-                        token_info['fomo'] = d_apys
+                        token_info['fomo'] = apys_returned
                     else:
-                        token_info['fomo'] += d_apys
+                        token_info['fomo'] += apys_returned
 
     # Sorted into token_info by unrealized_value
     for token_info in address_info:
