@@ -1,8 +1,7 @@
 from uuid import uuid4
-from web3 import Web3, HTTPProvider
-from backend.web3_provider import MyHTTPProvider
 
 from backend.protocols.spark.contracts import SPARK_CONTRACTS
+from backend.utils import get_node_provider
 
 
 def get_liquidity_index(node_provider, contract_address, underlying_token, block_number):
@@ -23,27 +22,7 @@ def get_liquidity_index(node_provider, contract_address, underlying_token, block
     return liquidity_index
 
 
-def get_node_provider(chain_id):
-    if chain_id == 1:
-        node_address = 'https://eth-mainnet.g.alchemy.com/v2/7t0ETmbK3sb6zwa2PBX-OdS9Pouq94xV'
-        w3 = Web3(HTTPProvider(node_address))
-        node_provider = MyHTTPProvider(node_address)
-        block_number_current = int(w3.eth.get_block('latest').number) - 64
-        block_number_delta = 220_000
-        block_number_previous = block_number_current - block_number_delta
-    elif chain_id == 100:
-        node_address = 'https://rpc.xdaichain.com/'
-        w3 = Web3(HTTPProvider(node_address))
-        node_provider = MyHTTPProvider(node_address)
-        block_number_current = int(w3.eth.get_block('latest').number) - 64
-        block_number_delta = 500_000
-        block_number_previous = block_number_current - block_number_delta
-    else:
-        raise ValueError(f'{chain_id} is not supported')
-    return node_provider, block_number_current, block_number_previous
-
-
-def execute():
+def make_cache():
     records = []
     for chain_id, contracts in SPARK_CONTRACTS.items():
         for contract in contracts:
@@ -57,13 +36,11 @@ def execute():
             timescale = 31536000
             apy = (1 + r / timescale) ** timescale - 1
 
-            records.append(
-                {
-                    "chain_id": chain_id,
-                    "protocol_name": "SPARK",
-                    "underlying_token_address": contract["underlying"].lower(),
-                    'apy': '{:.16f}'.format(apy)
-                }
-            )
+            records.append({
+                "chain_id": chain_id,
+                "protocol_name": "SPARK",
+                "underlying_token_address": contract["underlying"].lower(),
+                'apy': '{:.16f}'.format(apy)
+            })
 
     return records

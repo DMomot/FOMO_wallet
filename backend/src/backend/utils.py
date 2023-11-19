@@ -1,7 +1,8 @@
-from web3.auto import Web3
-from web3.middleware import geth_poa_middleware
 import requests
 import json
+from web3.middleware import geth_poa_middleware
+from web3 import Web3, HTTPProvider
+from backend.web3_provider import MyHTTPProvider
 
 
 def hex_to_int(x):
@@ -55,3 +56,23 @@ def send_request(chain_id, contract_address, data, block_number):
     ).content
 
     return json.loads(response)
+
+
+def get_node_provider(chain_id):
+    if chain_id == 1:
+        node_address = 'https://eth-mainnet.g.alchemy.com/v2/7t0ETmbK3sb6zwa2PBX-OdS9Pouq94xV'
+        w3 = Web3(HTTPProvider(node_address))
+        node_provider = MyHTTPProvider(node_address)
+        block_number_current = int(w3.eth.get_block('latest').number) - 64
+        block_number_delta = 220_000
+        block_number_previous = block_number_current - block_number_delta
+    elif chain_id == 100:
+        node_address = 'https://rpc.xdaichain.com/'
+        w3 = Web3(HTTPProvider(node_address))
+        node_provider = MyHTTPProvider(node_address)
+        block_number_current = int(w3.eth.get_block('latest').number) - 64
+        block_number_delta = 500_000
+        block_number_previous = block_number_current - block_number_delta
+    else:
+        raise ValueError(f'{chain_id} is not supported')
+    return node_provider, block_number_current, block_number_previous
