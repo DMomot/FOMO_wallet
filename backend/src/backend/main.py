@@ -97,10 +97,11 @@ async def get_fomo_last_month(
 
     # Sorted into token_info by unrealized_value
     for token_info in address_info:
-        if 'fomo' in token_info and len(token_info['fomo']) > 0:
-            token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
-        else:
-            del token_info['fomo']
+        if 'fomo' in token_info:
+            if len(token_info['fomo']) > 0:
+                token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
+            else:
+                del token_info['fomo']
 
     # Sorted by max(fomo.unrealized_value)
     address_info = sorted(
