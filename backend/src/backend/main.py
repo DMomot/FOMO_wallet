@@ -44,28 +44,29 @@ async def get_fomo_last_month(
                     token_info['chain_id'] in await protocol.get_supported_chains()
                     and token_info['address'] in await protocol.get_supported_tokens(chain_id=token_info['chain_id'])
             ):
-                protocol_info: dict | None = await protocol.get_apy(
+                apys: dict | None = await protocol.get_apy(
                     underlying_token_address=token_info['address'],
                     chain_id=token_info['chain_id'],
                 )
-                if protocol_info:
-                    protocol_info['unrealized_value'] = token_info['value'] * (protocol_info['apy'])
-                    protocol_info['unrealized_amount'] = token_info['amount'] * (protocol_info['apy'])
-                    protocol_info['logo_url'] = protocol.get_logo_url()
-                    protocol_info['project_url'] = protocol.get_project_url()
+                for apy in apys:
+                    if apy:
+                        apy['unrealized_value'] = token_info['value'] * (apy['apy'])
+                        apy['unrealized_amount'] = token_info['amount'] * (apy['apy'])
+                        apy['logo_url'] = protocol.get_logo_url()
+                        apy['project_url'] = protocol.get_project_url()
 
-                    if (
-                            'additional_info' in protocol_info
-                            and 'unrealized_value' in protocol_info['additional_info']
-                            and callable(protocol_info['additional_info']['unrealized_value'])
-                    ):
-                        protocol_info['additional_info']['unrealized_value'] = \
-                            protocol_info['additional_info']['unrealized_value'](token_info['value'])
+                        if (
+                                'additional_info' in apy
+                                and 'unrealized_value' in apy['additional_info']
+                                and callable(apy['additional_info']['unrealized_value'])
+                        ):
+                            apy['additional_info']['unrealized_value'] = \
+                                apy['additional_info']['unrealized_value'](token_info['value'])
 
                     if 'fomo' not in token_info:
-                        token_info['fomo'] = [protocol_info]
+                        token_info['fomo'] = apys
                     else:
-                        token_info['fomo'].append(protocol_info)
+                        token_info['fomo'] += apys
 
     # Sorted into token_info by unrealized_value
     for token_info in address_info:

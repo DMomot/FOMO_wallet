@@ -5,22 +5,22 @@ from backend.protocols.spark.cached_data import state_last_month
 
 
 class SPARK(BaseProtocol):
-    def get_logo_url(self):
+    def get_logo_url(self) -> str:
         return 'https://icons.llamao.fi/icons/protocols/spark?w=128&h=128'
 
-    def get_project_url(self):
+    def get_project_url(self) -> str:
         return 'https://app.spark.fi/'
 
     async def get_supported_tokens(
             self,
             chain_id: ChainId,
-    ):
+    ) -> set:
         supported_tokens = [x['underlying_token_address'] for x in state_last_month[chain_id]]
         if chain_id in native_to_wrapped_mapping:
             supported_tokens += list(native_to_wrapped_mapping[chain_id].keys())
         return set(supported_tokens)
 
-    async def get_supported_chains(self):
+    async def get_supported_chains(self) -> list:
         return [
             ChainId.ETH,
         ]
@@ -29,7 +29,7 @@ class SPARK(BaseProtocol):
             self,
             underlying_token_address: AddressType,
             chain_id: ChainId,
-    ):
+    ) -> list | None:
         if underlying_token_address in native_to_wrapped_mapping[chain_id]:
             underlying_token_address = native_to_wrapped_mapping[chain_id][underlying_token_address]
 
@@ -39,4 +39,4 @@ class SPARK(BaseProtocol):
         ]
         if len(res) == 0:
             return None
-        return res[0].copy()
+        return res.copy()
