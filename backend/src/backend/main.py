@@ -10,9 +10,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from backend.protocols.gearbox import GEARBOX
 from backend.protocols.lido import LIDO
 from backend.protocols.spark import SPARK
+from backend.config import settings
 
 from web3 import AsyncWeb3, AsyncHTTPProvider
-w3 = AsyncWeb3(AsyncHTTPProvider('https://mainnet.infura.io/v3/ce3a8e24ad4f4ea78dede1bbf11e436b'))
+w3 = AsyncWeb3(AsyncHTTPProvider(settings.infura_url))
 
 app = FastAPI()
 

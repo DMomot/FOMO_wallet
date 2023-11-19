@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     redis_port: int
     redis_password: str
 
+    infura_url: str
+
     model_config = SettingsConfigDict(env_file=".env")
 
 
