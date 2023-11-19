@@ -9,6 +9,8 @@ state_last_month = {
             'underlying_token_address': '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
             'apy': 0.0395929901063403
         },
+    ],
+    ChainId.POLYGON: [
         {
             'chain_id': 137,
             'protocol_name': 'LIDO',
