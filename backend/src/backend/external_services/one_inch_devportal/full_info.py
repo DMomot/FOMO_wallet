@@ -21,15 +21,21 @@ async def get_address_info(
         for token_address, token_info in chain_tokens.items():
             if balances[chain_id].get(token_address) and 'logoURI' in token_info:
                 price = spot_prices[chain_id].get(token_address) or 0
+                value = round(balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price)
+                amount = balances[chain_id][token_address] / (10 ** token_info["decimals"])
+                if amount < 100:
+                    amount = round(amount, 2)
+                else:
+                    amount = round(amount)
                 result.append({
                     "chain_id": chain_id,
                     "address": token_address,
                     "name": token_info["name"],
                     "symbol": token_info["symbol"],
                     "amount_raw": balances[chain_id][token_address],
-                    "amount": balances[chain_id][token_address] / (10 ** token_info["decimals"]),
+                    "amount": amount,
                     "price": price,
-                    "value": round(balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price),
+                    "value": value,
                     "logo_url": token_info["logoURI"],
                     "decimals": token_info["decimals"],
                 })
