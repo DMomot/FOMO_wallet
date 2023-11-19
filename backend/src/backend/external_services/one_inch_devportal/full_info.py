@@ -29,7 +29,7 @@ async def get_address_info(
                     "amount_raw": balances[chain_id][token_address],
                     "amount": balances[chain_id][token_address] / (10 ** token_info["decimals"]),
                     "price": price,
-                    "value": balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price,
+                    "value": round(balances[chain_id][token_address] / (10 ** token_info["decimals"]) * price),
                     "logo_url": token_info["logoURI"],
                     "decimals": token_info["decimals"],
                 })
