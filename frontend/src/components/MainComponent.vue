@@ -73,7 +73,7 @@
                     </div>
                     <span class="token-name">{{ token.name }}</span>
                     <span class="token-amount">
-                        {{ token.amount.toFixed(4) }} {{ token.symbol }}
+                        {{ formatAmountValue(token.amount) }} {{ token.symbol }}
                     </span>
                     <span class="token-value">
                         {{ formatValue(token.amount * token.price) }} $
@@ -155,7 +155,7 @@ import Dialog from 'primevue/dialog';
 import chainsLogo from '@/helpers/chainsLogo.json'
 import ProgressSpinner from 'primevue/progressspinner';
 
-import { checkAddress, calculateTotalValues, formatValue } from '@/helpers/index.js'
+import { checkAddress, calculateTotalValues, formatValue, formatAmountValue } from '@/helpers/index.js'
 import { getFomoVibe } from '@/api/index.js'
 
 export default {
@@ -216,6 +216,7 @@ export default {
             template_logo,
             openLink,
             currentAddress,
+            formatAmountValue,
             FOMOSearch,
             showModal,
             dialogVisible,

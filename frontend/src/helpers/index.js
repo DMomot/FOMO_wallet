@@ -67,6 +67,18 @@ export const formatValue = (value) =>{
     return formattedNumber.toLocaleString();
 }
 
+export const formatAmountValue = (value) =>{
+
+    let number = parseFloat(value).toFixed(2);
+
+    console.log(number)
+
+    let formattedNumber = parseFloat(number);
+    console.log(formattedNumber)
+
+    return formattedNumber.toLocaleString();
+}
+
 
 
 
