@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 from fastapi import FastAPI
 
 from backend.external_services.one_inch_devportal.full_info import get_address_info
@@ -48,8 +50,10 @@ async def get_fomo_last_month(
                     underlying_token_address=token_info['address'],
                     chain_id=token_info['chain_id'],
                 )
-                for apy in apys:
-                    if apy:
+
+                if apys:
+                    d_apys = deepcopy(apys)
+                    for apy in d_apys:
                         apy['unrealized_value'] = token_info['value'] * (apy['apy'])
                         apy['unrealized_amount'] = token_info['amount'] * (apy['apy'])
                         apy['logo_url'] = protocol.get_logo_url()
@@ -64,15 +68,14 @@ async def get_fomo_last_month(
                                 apy['additional_info']['unrealized_value'](token_info['value'])
 
                     if 'fomo' not in token_info:
-                        token_info['fomo'] = apys
+                        token_info['fomo'] = d_apys
                     else:
-                        token_info['fomo'] += apys
+                        token_info['fomo'] += d_apys
 
     # Sorted into token_info by unrealized_value
     for token_info in address_info:
         if 'fomo' in token_info:
             token_info['fomo'] = sorted(token_info['fomo'], key=lambda x: x['unrealized_value'], reverse=True)
-
     # Sorted by max(fomo.unrealized_value)
     address_info = sorted(
         address_info,
