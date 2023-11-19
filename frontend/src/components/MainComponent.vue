@@ -2,6 +2,7 @@
     <div class="main-container">
         <div v-if="screen=='search'" class="main-container-search">
             <div class="main-header">
+                <img src="/logo.png" alt="logo" class="main-logo" style="border-radius: 50%; width: 10rem">
                 <div class="main-title">FomoGotchi</div>
             </div>
             <div class="search-container">
