@@ -23,8 +23,8 @@
                     <div class="total-info-value">{{ formatValue(totalFomoValues.totalValue) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized Profit by 1 year</div>
-                    <div class="total-info-value">-{{ formatValue(totalFomoValues.totalUP) }} $</div>
+                    <div class="total-info-title-ul">You lost by 1 year</div>
+                    <div class="total-info-value-ul">{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
                     <div class="total-info-title">Total Unrealized APR</div>
@@ -50,16 +50,17 @@
                     <span class="token-value">Value</span>
                     <span class="token-protocol">Protocol</span>
                     <span class="token-pnl">You lost 1Y</span>
-                    <span class="token-roi">APY</span>
+                    <span class="token-roi">APY 1Y</span>
+                    <span class="token-invest"></span>
                 </div>
                 <div v-for="token in tokens"
                     :key="(token.address, token.chain_id)"
                     class="token-item"
                     @click="showModal(token)">
                     <div class="img-container">
-                        <img v-if="token.logo_url" :src=token.logo_url :alt=key class="token-img">
-                        <img v-else :src=template_logo :alt=key class="token-img">
-                        <img :src=chainsLogo[token.chain_id] :alt=key class="chain-img">
+                        <img v-if="token.logo_url" :src=token.logo_url class="token-img">
+                        <img v-else :src=template_logo class="token-img">
+                        <img :src=chainsLogo[token.chain_id] class="chain-img">
                     </div>
                     <span class="token-name">{{ token.name }}</span>
                     <span class="token-amount">
@@ -69,11 +70,11 @@
                         {{ formatValue(token.amount * token.price) }} $
                     </span>
                     <span v-if="token.fomo" class="token-protocol">
-                        <img :src=token.fomo[0].logo_url :alt=key class="protocol-img">
+                        <img :src=token.fomo[0].logo_url class="protocol-img">
                         {{ token.fomo[0].protocol_name }}
                     </span>
                     <span v-else class="token-protocol">
-                        No potential rewards
+                        No rewards
                     </span>
                     <span v-if="token.fomo" class="token-pnl">
                         {{ formatValue(token.fomo[0].unrealized_value) }} $
@@ -86,7 +87,13 @@
                     </span>
                     <span v-else class="token-roi">
                         0
+                    </span>
+                    <span v-if="token.fomo" class="token-roi">
+                        <Button label="Invest" class="p-button-raised p-button-rounded p-button-success" />
                     </span> 
+                    <span v-else class="token-invest">
+                        <Button label="Invest" class="p-button-raised p-button-rounded p-button-disabled" />
+                    </span>
                 </div>
                 <Dialog v-model:visible="dialogVisible" modal :style="{ width: '50vw' }" :header="'Unrealized rewards'">
                     <div class="dialog-container">
@@ -96,8 +103,9 @@
                                 <th>Chain</th>
                                 <th>Protocol Name</th>
                                 <th>Token Name</th>
-                                <th>APY</th>
-                                <th>Unrealized Value</th>
+                                <th>APY 1Y</th>
+                                <th>You lost 1Y</th>
+                                <th>Invest</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,12 +120,10 @@
                                 </td>
                                 <td>{{ (100 * item.apy).toFixed(2) }}%</td>
                                 <td>{{ formatValue(item.unrealized_value) }} $</td>
+                                <td><Button label="Invest" class="p-button-raised p-button-rounded p-button-success" @click="openLink(item.project_url)"/></td>
                             </tr>
                         </tbody>
                         </table>
-                    </div>
-                    <div>
-                        {{ dialogData }}
                     </div>
                 </Dialog>
             </div>
@@ -132,7 +138,8 @@
 
 
 <script>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
@@ -141,6 +148,7 @@ import ProgressSpinner from 'primevue/progressspinner';
 
 import { checkAddress, calculateTotalValues, formatValue } from '@/helpers/index.js'
 import { getFomoVibe } from '@/api/index.js'
+
 export default {
     components: {
       ProgressSpinner,
@@ -149,17 +157,34 @@ export default {
       Button,
     },
     name: 'MainComponent',
+    
     setup() {
 
-        const template_logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsbGx31Hoow8Inq8Tr0TjAsyU4nVkxB4pEGNmPfFfxQ&s'
+        const route = useRoute();
+
+        let currentAddress = ref('');
         let searchQuery = ref('0xd470055c6189b921c4d44b3d277ad868f79c0f75')
+        
+
+        watch(() => route.params, (newParams) => {
+            if (newParams.address) {
+                searchQuery.value = newParams.address;
+                FOMOSearch();
+            }
+        }, { immediate: true });
+
+        const template_logo = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIsbGx31Hoow8Inq8Tr0TjAsyU4nVkxB4pEGNmPfFfxQ&s'
         let screen = ref('search')
         let tokens = ref([])
         let dialogVisible = ref(false);
         let dialogData = ref({});
         let isLoading = ref(false);
         let totalFomoValues = ref({})
-        let currentAddress = ref('');
+
+        const openLink = (link) =>{
+            window.open(link, '_blank');
+        }
+
 
 
         const FOMOSearch = async () => {
@@ -180,6 +205,7 @@ export default {
 
         return {
             template_logo,
+            openLink,
             currentAddress,
             FOMOSearch,
             showModal,

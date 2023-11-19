@@ -60,6 +60,8 @@ html, body {
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
     font-weight: 700;
+    padding: 20px 0;
+    border-radius: 10px;
 }
 
 .chain-img {
@@ -89,6 +91,7 @@ html, body {
     justify-content: space-around;
     align-items: center;
     border: 1px solid #ccc;
+    border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
   
@@ -99,12 +102,27 @@ html, body {
   
 .total-info-title {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 900;
     margin-bottom: 10px;
 }
+
+.total-info-title-ul{
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: crimson;
+}
+
   
 .total-info-value {
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.total-info-value-ul {
+    font-size: 20px;
+    font-weight: 900;
+    color: crimson;
 }
 
 .token-name {
@@ -114,7 +132,7 @@ html, body {
 
 .token-amount{
     font-size: 16px;
-    width: 200px;
+    width: 180px;
     text-align: end;
 }
 .token-value, .token-name {
@@ -131,7 +149,7 @@ html, body {
 
 .token-protocol{
     font-size: 16px;
-    width: 200px;
+    width: 180px;
     text-align: end;
 
 }
@@ -140,6 +158,10 @@ html, body {
     font-size: 16px;
     width: 100px;
     text-align: end;
+}
+
+.token-invest{
+    width: 100px;
 }
 
 .protocol-img{
