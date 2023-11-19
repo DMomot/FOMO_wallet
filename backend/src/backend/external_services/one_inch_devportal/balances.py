@@ -14,7 +14,7 @@ async def get_balances_by_chain_id_and_address(
         address: AddressType,
 ):
     async with RetryClient(
-            retry_options=RandomRetry(statuses=[429], attempts=20, min_timeout=0.5, max_timeout=0.5),
+            retry_options=RandomRetry(statuses=[429], attempts=30, min_timeout=0.5, max_timeout=0.5),
             logger=log,
     ) as client:
         async with client.request(

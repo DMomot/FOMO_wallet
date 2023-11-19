@@ -12,7 +12,7 @@ async def get_tokens_by_chain_id(
         chain_id: ChainId,
 ):
     async with RetryClient(
-            retry_options=RandomRetry(statuses=[429], attempts=20, min_timeout=1, max_timeout=1),
+            retry_options=RandomRetry(statuses=[429], attempts=30, min_timeout=1, max_timeout=1),
             logger=log,
     ) as client:
         async with client.request(

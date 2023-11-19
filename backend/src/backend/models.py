@@ -17,4 +17,6 @@ class ChainId(IntEnum):
 supported_chains = [
     ChainId.ETH,
     ChainId.POLYGON,
+    ChainId.GNOSIS,
+    ChainId.ARBITRUM,
 ]
