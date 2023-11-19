@@ -42,7 +42,7 @@
             </div>
             <div class="token-header-container">
                 <div class="tokens-header">
-                    <h1>Your recommendations</h1>
+                    <h1>Personalized recommendations</h1>
                 </div>
                 <!-- <div class="images-container">
                     <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
