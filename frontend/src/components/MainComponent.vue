@@ -42,14 +42,14 @@
             </div>
             <div class="token-header-container">
                 <div class="tokens-header">
-                    <h1>Tokens by chains</h1>
+                    <h1>Your recommendations</h1>
                 </div>
-                <div class="images-container">
+                <!-- <div class="images-container">
                     <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
                     <img :src="chainsLogo[137]" alt="Token 2">
                     <img :src="chainsLogo[42161]" alt="Token 3">
                     <img :src="chainsLogo[100]" alt="Token 4">
-                </div>
+                </div> -->
             </div>
             <div class="token-list">
                 <div class="token-item-header">
