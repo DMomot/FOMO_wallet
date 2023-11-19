@@ -60,9 +60,11 @@ export const formatValue = (value) =>{
     if (value < 0.01){
         return "< 0.01"
     }
-    let number = parseFloat(value.toFixed(2));
+    let number = parseFloat(value).toFixed(2);
 
-    return number.toLocaleString();
+    let formattedNumber = parseFloat(number);
+
+    return formattedNumber.toLocaleString();
 }
 
 

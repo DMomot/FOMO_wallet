@@ -65,7 +65,7 @@
                     </div>
                     <span class="token-name">{{ token.name }}</span>
                     <span class="token-amount">
-                        {{ token.amount.toFixed(4) }} {{ token.symbol }}
+                        {{ formatValue(token.amount) }} {{ token.symbol }}
                     </span>
                     <span class="token-value">
                         {{ formatValue(token.amount * token.price) }} $
