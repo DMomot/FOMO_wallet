@@ -36,8 +36,19 @@
                     <div class="total-info-value-ul">{{ formatValue(totalFomoValues.totalUP) }} $</div>
                 </div>
                 <div class="total-info-block">
-                    <div class="total-info-title">Total Unrealized APR</div>
-                    <div class="total-info-value">{{ formatValue(100 * totalFomoValues.totalUP/totalFomoValues.totalValue) }} %</div>
+                    <div class="total-info-title">Total Unrealized APY</div>
+                    <div class="total-info-value">{{ 100 * formatAmountValue(totalFomoValues.totalUP/totalFomoValues.totalValue) }} %</div>
+                </div>
+            </div>
+            <div class="token-header-container">
+                <div class="tokens-header">
+                    <h1>Tokens by chains</h1>
+                </div>
+                <div class="images-container">
+                    <img :src="chainsLogo[1]" class="chain_img_list" alt="Token 1">
+                    <img :src="chainsLogo[137]" alt="Token 2">
+                    <img :src="chainsLogo[42161]" alt="Token 3">
+                    <img :src="chainsLogo[100]" alt="Token 4">
                 </div>
             </div>
             <div class="token-list">
