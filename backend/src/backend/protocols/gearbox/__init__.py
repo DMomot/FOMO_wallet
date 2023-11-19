@@ -21,9 +21,7 @@ class GEARBOX(BaseProtocol):
         return set(supported_tokens)
 
     async def get_supported_chains(self) -> list:
-        return [
-            ChainId.ETH,
-        ]
+        return state_last_month.keys()
 
     async def get_apy(
             self,

@@ -21,10 +21,7 @@ class AAVE(BaseProtocol):
         return set(supported_tokens)
 
     async def get_supported_chains(self) -> list:
-        return [
-            ChainId.ETH,
-            ChainId.POLYGON,
-        ]
+        return state_last_month.keys()
 
     async def get_apy(
             self,
